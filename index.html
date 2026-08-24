@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌾 Jurnal Padi MR 337 - 115 HSS</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Segoe UI',system-ui,sans-serif;
+            background:#0b1a0e;
+            background-image:radial-gradient(circle at 20% 30%,#142f18 0%,#0a140c 90%);
+            min-height:100vh;
+            padding:20px 14px;
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+            color:#e2f0e2;
+        }
+        .container {
+            max-width:1100px;
+            width:100%;
+            background:rgba(18,40,22,0.75);
+            backdrop-filter:blur(4px);
+            border-radius:40px;
+            padding:26px 20px 34px;
+            box-shadow:0 20px 50px rgba(0,0,0,0.8),0 0 0 1px rgba(80,180,80,0.15);
+            border:1px solid rgba(70,160,70,0.20);
+        }
+        .header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:12px;
+            margin-bottom:20px;
+            padding-bottom:14px;
+            border-bottom:1px solid rgba(90,190,90,0.25);
+        }
+        .header h1 {
+            font-size:24px;
+            font-weight:700;
+            background:linear-gradient(135deg,#b3f0b3,#7dd87d);
+            -webkit-background-clip:text;
+            background-clip:text;
+            color:transparent;
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+        .badge-status {
+            background:#1e4a24;
+            padding:6px 18px;
+            border-radius:60px;
+            font-size:13px;
+            font-weight:600;
+            color:#b3f0b3;
+            border:1px solid #3a8a3a;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            box-shadow:0 0 12px rgba(70,200,70,0.15);
+        }
+        .badge-status .dot {
+            width:10px;
+            height:10px;
+            background:#4cd964;
+            border-radius:50%;
+            display:inline-block;
+            animation:pulse-dot 2s infinite;
+        }
+        .badge-status.warning { border-color:#f0a030; background:#3a2e1a; }
+        .badge-status.warning .dot { background:#f0a030; }
+        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+        .countdown-wrap {
+            background:linear-gradient(135deg,#1a3a1e,#0d260f);
+            border-radius:24px;
+            padding:18px 24px;
+            margin-bottom:24px;
+            border:1px solid rgba(70,180,70,0.15);
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            justify-content:space-between;
+            gap:12px;
+        }
+        .countdown-wrap .label-cd { font-size:13px; color:#8ab88a; font-weight:500; letter-spacing:0.5px; }
+        .countdown-wrap .value-cd { font-size:28px; font-weight:700; color:#f5fcd5; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+        .countdown-wrap .value-cd .angka { background:rgba(0,0,0,0.3); padding:4px 18px; border-radius:40px; border:1px solid rgba(80,200,80,0.15); }
+        .countdown-wrap .value-cd small { font-size:16px; font-weight:400; color:#90b890; }
+        .umur-badge { background:#1e4a24; padding:6px 20px; border-radius:60px; font-size:18px; font-weight:700; color:#b3f0b3; border:1px solid #3a8a3a; }
+        .table-wrap { overflow-x:auto; border-radius:24px; background:rgba(10,28,14,0.6); border:1px solid rgba(60,150,60,0.20); margin-bottom:26px; }
+        table { width:100%; border-collapse:collapse; font-size:13px; min-width:700px; }
+        thead { background:#0c2a12; border-bottom:2px solid #2a6e2a; }
+        thead th { padding:14px 12px; text-align:left; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; color:#a0d8a0; border-right:1px solid rgba(60,130,60,0.15); }
+        thead th:last-child { border-right:none; }
+        tbody tr { border-bottom:1px solid rgba(60,130,60,0.10); transition:background 0.2s; }
+        tbody tr:hover { background:rgba(50,140,50,0.12); }
+        tbody tr.row-last { background:rgba(60,180,60,0.08); border-left:3px solid #4cd964; }
+        tbody td { padding:12px 12px; vertical-align:middle; border-right:1px solid rgba(60,130,60,0.06); }
+        tbody td:last-child { border-right:none; }
+        .col-hss { font-weight:600; color:#c5ecc5; white-space:nowrap; }
+        .col-tanggal { color:#c5e0c5; white-space:nowrap; }
+        .col-kegiatan { color:#def0de; line-height:1.4; }
+        .col-amunisi { font-size:12px; color:#b8e0b8; background:rgba(30,80,30,0.25); padding:4px 12px; border-radius:40px; display:inline-block; white-space:nowrap; max-width:220px; overflow:hidden; text-overflow:ellipsis; }
+        .col-amunisi.pupuk { background:rgba(200,170,60,0.20); color:#f3e2a0; border:1px solid rgba(200,170,60,0.15); }
+        .col-amunisi.semprot { background:rgba(60,150,200,0.20); color:#a0d0f0; border:1px solid rgba(60,150,200,0.15); }
+        .col-no { font-weight:600; color:#6aa86a; text-align:center; }
+        .ringkasan-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin:24px 0 20px; }
+        .card-ringkasan { background:rgba(12,34,16,0.7); border-radius:20px; padding:14px 16px; border:1px solid rgba(70,160,70,0.15); transition:transform 0.15s,border-color 0.2s; }
+        .card-ringkasan:hover { border-color:rgba(100,200,100,0.3); transform:translateY(-2px); }
+        .card-ringkasan .label { font-size:10px; text-transform:uppercase; letter-spacing:0.6px; color:#7fb07f; font-weight:600; }
+        .card-ringkasan .value { font-size:18px; font-weight:700; margin-top:4px; color:#d4f0d4; line-height:1.2; }
+        .card-ringkasan .value small { font-size:13px; font-weight:400; color:#90b890; }
+        .card-ringkasan.highlight { border-color:#4cd964; background:rgba(30,90,30,0.35); }
+        .card-ringkasan.danger { border-color:#e06040; background:rgba(90,30,20,0.30); }
+        .card-ringkasan.warning { border-color:#f0a030; background:rgba(90,70,20,0.25); }
+        .riwayat-wrap { background:rgba(10,28,14,0.5); border-radius:24px; padding:18px 20px; border:1px solid rgba(60,150,60,0.12); margin-top:6px; }
+        .riwayat-wrap h3 { font-size:15px; font-weight:600; color:#a0d8a0; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+        .riwayat-grid { display:flex; flex-wrap:wrap; gap:8px 14px; }
+        .riwayat-item { background:rgba(20,55,24,0.4); padding:5px 14px 5px 10px; border-radius:40px; font-size:12px; border-left:3px solid #4cd964; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+        .riwayat-item .tgl { color:#8ab88a; font-weight:500; white-space:nowrap; }
+        .riwayat-item .isi { color:#d0ecd0; }
+        .riwayat-item.latest { border-left-color:#f0a030; background:rgba(60,50,20,0.4); }
+        .rekomendasi { margin-top:24px; background:linear-gradient(135deg,#102f16,#08200c); border-radius:28px; padding:20px 24px; border:1px solid #3a8a3a; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; }
+        .rekomendasi .kiri { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+        .rekomendasi .icon-besar { font-size:34px; }
+        .rekomendasi .teks h4 { font-size:17px; font-weight:700; color:#c5f0c5; }
+        .rekomendasi .teks p { color:#98c898; font-size:13px; margin-top:2px; }
+        .rekomendasi .teks p strong { color:#d4f0d4; }
+        .rekomendasi .tombol-rekom { background:#2a7a2a; padding:8px 26px; border-radius:60px; font-weight:700; font-size:14px; color:#f0fff0; border:1px solid #4ca84c; cursor:default; }
+        .rekomendasi .tombol-rekom.warning { background:#7a6a2a; border-color:#a8904c; }
+        .footer { margin-top:22px; text-align:center; font-size:11px; color:#4f7a4f; border-top:1px solid rgba(60,130,60,0.10); padding-top:18px; }
+        @media (max-width:600px) {
+            .container { padding:14px 10px; border-radius:28px; }
+            .header h1 { font-size:18px; }
+            .badge-status { font-size:11px; padding:4px 12px; }
+            .countdown-wrap .value-cd { font-size:22px; }
+            .umur-badge { font-size:15px; padding:4px 14px; }
+            .card-ringkasan .value { font-size:15px; }
+            .ringkasan-grid { grid-template-columns:1fr 1fr; }
+            .rekomendasi { flex-direction:column; align-items:flex-start; }
+            .rekomendasi .tombol-rekom { align-self:stretch; text-align:center; }
+            .col-amunisi { max-width:120px; font-size:11px; white-space:normal; }
+            tbody td { padding:8px 8px; font-size:12px; }
+            thead th { padding:10px 8px; font-size:10px; }
+            .riwayat-item { font-size:11px; padding:4px 10px 4px 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1><span>🌾</span> Jurnal Padi MR 337</h1>
+        <div class="badge-status" id="statusBadge"><span class="dot"></span> Kondisi Aman</div>
+    </div>
+    <div class="countdown-wrap">
+        <div>
+            <div class="label-cd">📅 TANAM · 6 JULI 2026</div>
+            <div class="value-cd"><span class="angka" id="umurDisplay">-- HSS</span><small>umur</small></div>
+        </div>
+        <div style="text-align:right;">
+            <div class="label-cd">⏳ MENUJU PANEN 115 HSS</div>
+            <div class="value-cd"><span class="angka" id="countdownDisplay">--</span><small>hari lagi</small></div>
+        </div>
+        <div><div class="umur-badge" id="faseDisplay">🌱 Fase</div></div>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>No</th><th>Tanggal</th><th>HSS</th><th>Kegiatan</th><th>Amunisi / Pupuk</th></tr></thead>
+            <tbody id="tabelBody"></tbody>
+        </table>
+    </div>
+    <div class="ringkasan-grid" id="cardContainer"></div>
+    <div class="riwayat-wrap">
+        <h3>🧪 Riwayat Amunisi</h3>
+        <div class="riwayat-grid" id="riwayatContainer"></div>
+    </div>
+    <div class="rekomendasi" id="rekomendasiBox">
+        <div class="kiri">
+            <div class="icon-besar">🧠</div>
+            <div class="teks">
+                <h4>Rekomendasi</h4>
+                <p id="rekomTeks">Memuat data...</p>
+            </div>
+        </div>
+        <div class="tombol-rekom" id="tombolRekom">✅ HOLD</div>
+    </div>
+    <div class="footer">🌾 MR 337 · Target 115 HSS · Pemupukan selesai — STOP PUPUK!</div>
+</div>
+<script>
+    const tglTanam = new Date(2026,6,6);
+    const targetHSS = 115;
+    const sekarang = new Date();
+
+    const kegiatanData = [
+        {no:1,tgl:'Senin, 6 Juli 2026',hss:0,kegiatan:'🌱 Tabela / tanam benih langsung',amunisi:'Benih MR 337',amCls:''},
+        {no:2,tgl:'Selasa, 14 Juli 2026',hss:8,kegiatan:'🐛 Penyemprotan pertama pengendalian ulat',amunisi:'Starban',amCls:'semprot'},
+        {no:3,tgl:'Selasa, 21 Juli 2026',hss:15,kegiatan:'🐛 Penyemprotan kedua + 🌱 buat jalur + penyulaman',amunisi:'Starban',amCls:'semprot'},
+        {no:4,tgl:'Rabu, 22 Juli 2026',hss:16,kegiatan:'🌱 Membuat jalur + penyulaman',amunisi:'—',amCls:''},
+        {no:5,tgl:'Selasa, 28 Juli 2026',hss:22,kegiatan:'🌱 Penyulaman tanaman',amunisi:'—',amCls:''},
+        {no:6,tgl:'Rabu, 29 Juli 2026',hss:23,kegiatan:'🌱 Melanjutkan penyulaman',amunisi:'—',amCls:''},
+        {no:7,tgl:'Kamis, 30 Juli 2026',hss:24,kegiatan:'💧 Kontrol air + 🌱 penyulaman tipis-tipis',amunisi:'—',amCls:''},
+        {no:8,tgl:'Jumat, 31 Juli 2026',hss:25,kegiatan:'🐛 Penyemprotan lanjutan',amunisi:'Ultradap + AmiCa + Fargo 70 WP + Rejoso',amCls:'semprot'},
+        {no:9,tgl:'Senin, 3 Agustus 2026',hss:28,kegiatan:'🐛 Penyemprotan lanjutan',amunisi:'Ultradap + AmiCa + Fargo 70 WP + Vayego',amCls:'semprot'},
+        {no:10,tgl:'Sabtu, 8 Agustus 2026',hss:33,kegiatan:'🌾 Pemupukan',amunisi:'Phonska 1 zak + Urea 1 zak',amCls:'pupuk'},
+        {no:11,tgl:'Senin, 10 Agustus 2026',hss:35,kegiatan:'🐛 Penyemprotan lanjutan',amunisi:'Dangke Turbo 40 WP + Fargo 70 WP + Ultradap + AmiCa + Starban',amCls:'semprot'},
+        {no:12,tgl:'Minggu, 16 Agustus 2026',hss:41,kegiatan:'🐛 Penyemprotan lanjutan',amunisi:'Dangke Turbo 40 WP + Fargo 70 WP + Ultradap + AmiCa + Starban',amCls:'semprot'},
+        {no:13,tgl:'Jumat, 21 Agustus 2026',hss:46,kegiatan:'🌾 Pemupukan terakhir (0,5 ha)',amunisi:'Phonska 50 kg + Urea 5 kg',amCls:'pupuk'},
+        {no:14,tgl:'Minggu, 23 Agustus 2026',hss:48,kegiatan:'🐛 Penyemprotan (wereng + ulat + jamur)',amunisi:'Fargo 70 WP + Vayego + Prima-Faw 50 EC + Bypass 60/20 WC',amCls:'semprot'}
+    ];
+
+    const riwayatAmunisi = [
+        {tgl:'14 Juli',isi:'Starban',latest:false},
+        {tgl:'21 Juli',isi:'Starban',latest:false},
+        {tgl:'31 Juli',isi:'Ultradap + AmiCa + Fargo 70 WP + Rejoso',latest:false},
+        {tgl:'3 Agustus',isi:'Ultradap + AmiCa + Fargo 70 WP + Vayego',latest:false},
+        {tgl:'10 Agustus',isi:'Dangke Turbo 40 WP + Fargo 70 WP + Ultradap + AmiCa + Starban',latest:false},
+        {tgl:'16 Agustus',isi:'Dangke Turbo 40 WP + Fargo 70 WP + Ultradap + AmiCa + Starban',latest:false},
+        {tgl:'23 Agustus',isi:'Fargo 70 WP + Vayego + Prima-Faw 50 EC + Bypass 60/20 WC',latest:true}
+    ];
+
+    const umurHSS = Math.floor((sekarang - tglTanam)/(1000*60*60*24));
+    const sisaPanen = Math.max(0, targetHSS - umurHSS);
+
+    document.getElementById('umurDisplay').textContent = umurHSS + ' HSS';
+    document.getElementById('countdownDisplay').textContent = sisaPanen;
+
+    let faseText='', faseEmoji='';
+    if(umurHSS<30){faseText='Vegetatif Awal';faseEmoji='🌱';}
+    else if(umurHSS<42){faseText='Vegetatif Akhir';faseEmoji='🌿';}
+    else if(umurHSS<56){faseText='Generatif Awal';faseEmoji='🌾';}
+    else if(umurHSS<80){faseText='Pengisian Bulir';faseEmoji='🌾';}
+    else if(umurHSS<100){faseText='Pemasakan Gabah';faseEmoji='🟡';}
+    else{faseText='Matang Panen';faseEmoji='🔶';}
+    document.getElementById('faseDisplay').textContent = faseEmoji + ' ' + faseText;
+
+    const tbody = document.getElementById('tabelBody');
+    kegiatanData.forEach(d=>{
+        const tr=document.createElement('tr');
+        if(d.no===14) tr.className='row-last';
+        tr.innerHTML=`<td class="col-no">${d.no}</td><td class="col-tanggal">${d.tgl}</td><td class="col-hss">${d.hss} HSS</td><td class="col-kegiatan">${d.kegiatan}</td><td><span class="col-amunisi ${d.amCls}">${d.amunisi}</span></td>`;
+        tbody.appendChild(tr);
+    });
+
+    const cards = [
+        {label:'🌱 Tabela',value:'6 Juli 2026',cls:'highlight'},
+        {label:'🌾 Hari ini',value:sekarang.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}),cls:''},
+        {label:'📅 Umur tanaman',value:umurHSS+' <small>HSS</small>',cls:'highlight'},
+        {label:'🐛 Semprot terakhir',value:'23 Agustus <small>48 HSS</small>',cls:'warning'},
+        {label:'🌾 Pupuk terakhir',value:'21 Agustus <small>46 HSS</small>',cls:'highlight'},
+        {label:'💩 Pupuk',value:'Phonska 50 kg + Urea 5 kg',cls:''},
+        {label:'⏱️ Jeda semprot',value:'7 <small>hari</small>',cls:''},
+        {label:'📆 Target panen',value:'115 <small>HSS</small>',cls:'danger'},
+        {label:'🗓️ Panen diperkirakan',value:'29 Oktober 2026',cls:''},
+        {label:'📐 Luas lahan',value:'0,5 <small>ha</small>',cls:''},
+        {label:'🧪 Total semprot',value:'7 <small>kali</small>',cls:'warning'},
+        {label:'⛔ Stop pupuk',value:'✅ SUDAH',cls:'highlight'}
+    ];
+    const cc=document.getElementById('cardContainer');
+    cards.forEach(c=>{const div=document.createElement('div');div.className='card-ringkasan'+(c.cls?' '+c.cls:'');div.innerHTML=`<div class="label">${c.label}</div><div class="value">${c.value}</div>`;cc.appendChild(div);});
+
+    const rw=document.getElementById('riwayatContainer');
+    riwayatAmunisi.forEach(d=>{const span=document.createElement('span');span.className='riwayat-item'+(d.latest?' latest':'');span.innerHTML=`<span class="tgl">${d.tgl}</span><span class="isi">${d.isi}</span>`;rw.appendChild(span);});
+
+    const rekomTeks=document.getElementById('rekomTeks');
+    const tombolRekom=document.getElementById('tombolRekom');
+
+    if(umurHSS>=80){
+        rekomTeks.innerHTML='🔶 Padi memasuki fase pemasakan. <strong>STOP SEMUA</strong> pupuk & semprot. Siapkan panen!';
+        tombolRekom.textContent='🛑 STOP TOTAL';
+        tombolRekom.className='tombol-rekom';
+    }else if(umurHSS>=60){
+        rekomTeks.innerHTML='⏳ Fase pengisian bulir. <strong>Jangan pupuk lagi!</strong> Semprot hanya jika ada serangan hama berat.';
+        tombolRekom.textContent='🔍 Pantau Saja';
+        tombolRekom.className='tombol-rekom';
+    }else if(umurHSS>=50){
+        rekomTeks.innerHTML='⚠️ Memasuki fase kritis hama (wereng & penggerek batang). <strong>Pantau rutin</strong> — semprot hanya kalau terlihat gejala. Jangan asal semprot!';
+        tombolRekom.textContent='🔍 Pantau Ketat';
+        tombolRekom.className='tombol-rekom warning';
+    }else{
+        rekomTeks.innerHTML='✅ Kondisi aman. <strong>Pupuk selesai — STOP PUPUK!</strong> Jaga air macak-macak 2–3 cm. Pantau hama di 50–60 HSS.';
+        tombolRekom.textContent='✅ HOLD DULU';
+        tombolRekom.className='tombol-rekom';
+    }
+
+    if(umurHSS>=46 && umurHSS<50){
+        rekomTeks.innerHTML='⚠️ Baru semprot + 2 hari setelah mupuk. <strong>Pantau efek fitotoksik</strong> (daun terbakar) besok pagi. Jangan tambah apapun sampai 50 HSS. Cek wereng 3 hari lagi!';
+        tombolRekom.textContent='🔍 Pantau Efek';
+        tombolRekom.className='tombol-rekom warning';
+    }
+
+    console.log('🌾 Jurnal Padi MR 337 — V5.0 FINAL!');
+</script>
+</body>
+</html>
